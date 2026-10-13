@@ -1,101 +1,192 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Pill, Bone, PersonSimpleRun, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
+import { HeroSection } from "@/components/HeroSection";
+import { FadeIn } from "@/components/FadeIn";
+import { Footer } from "@/components/Footer";
+import { CORPO_CLINICO, telefoneUrl, whatsappUrl } from "@/lib/clinica";
+
+function ServicesBento() {
+  return (
+    <section id="especialidades" className="py-24 bg-zinc-50 scroll-mt-8">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-zinc-950 mb-4">
+            Nossas Especialidades
+          </h2>
+          <p className="text-zinc-600 max-w-2xl text-lg">
+            Estrutura completa e profissionais qualificados para cuidar de todas as etapas do seu tratamento.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
+          {/* Asymmetric tiles */}
+
+          <div className="col-span-1 md:col-span-2 lg:col-span-7 bg-white rounded-3xl p-8 lg:p-12 border border-zinc-100 shadow-sm flex flex-col justify-between overflow-hidden relative">
+            <div className="relative z-10 max-w-md">
+              <div className="w-12 h-12 rounded-full bg-cyan-50 flex items-center justify-center mb-6">
+                <Bone size={24} className="text-cyan-700" weight="fill" />
+              </div>
+              <h3 className="text-2xl font-medium text-zinc-950 mb-3">Ortopedia Especializada</h3>
+              <p className="text-zinc-600 mb-8">
+                Diagnóstico preciso e tratamento cirúrgico ou conservador para lesões ósseas, articulares e musculares.
+              </p>
+              <Link href="/especialidades/ortopedia" className="inline-flex items-center gap-2 text-cyan-700 font-medium hover:text-cyan-800 transition-colors">
+                Saiba mais <ArrowRight size={16} />
+              </Link>
+            </div>
+            <div className="absolute right-0 bottom-0 w-1/2 h-full hidden lg:block opacity-40 mix-blend-multiply">
+              <Image
+                src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=600&auto=format&fit=crop"
+                alt="Médico analisando raio-x"
+                fill
+                sizes="(min-width: 1024px) 30vw, 0px"
+                className="object-cover object-right"
+              />
+            </div>
+          </div>
+
+          <div className="col-span-1 lg:col-span-5 bg-cyan-700 text-white rounded-3xl p-8 lg:p-12 flex flex-col justify-between">
+            <div>
+              <div className="w-12 h-12 rounded-full bg-cyan-600 flex items-center justify-center mb-6">
+                <PersonSimpleRun size={24} className="text-white" weight="fill" />
+              </div>
+              <h3 className="text-2xl font-medium mb-3">Reabilitação Esportiva</h3>
+              <p className="text-cyan-50 mb-8">
+                Programas específicos para atletas profissionais e amadores retornarem ao esporte com segurança e alto rendimento.
+              </p>
+            </div>
+          </div>
+
+          <div className="col-span-1 lg:col-span-5 bg-zinc-100 rounded-3xl p-8 lg:p-12">
+            <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center mb-6 shadow-sm">
+              <Pill size={24} className="text-cyan-700" weight="fill" />
+            </div>
+            <h3 className="text-xl font-medium text-zinc-950 mb-3">Clínica de Dor</h3>
+            <p className="text-zinc-600">
+              Tratamento multidisciplinar focado em controle de dores crônicas, bloqueios articulares e melhoria da qualidade de vida.
+            </p>
+          </div>
+
+          <div className="col-span-1 md:col-span-2 lg:col-span-7 bg-zinc-950 text-white rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+            <div className="relative z-10 max-w-lg">
+              <h3 className="text-2xl font-medium mb-3">Prevenção e Avaliação Biomecânica</h3>
+              <p className="text-zinc-400 mb-8">
+                Utilizamos tecnologia de ponta para analisar seus movimentos e prevenir futuras lesões, corrigindo desequilíbrios articulares.
+              </p>
+              <a
+                href={whatsappUrl("Olá! Gostaria de agendar uma avaliação biomecânica.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-white font-medium hover:text-cyan-400 transition-colors"
+              >
+                Agendar avaliação <ArrowRight size={16} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DoctorsSection() {
+  return (
+    <section id="corpo-clinico" className="py-24 bg-white scroll-mt-8">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-xl mb-16">
+          <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-zinc-950 mb-4">
+            Profissionais de Referência
+          </h2>
+          <p className="text-zinc-600 text-lg">
+            Nossa equipe é formada por especialistas renomados, em constante atualização técnica para oferecer os melhores protocolos.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {CORPO_CLINICO.map((doc, idx) => (
+            <FadeIn key={doc.name} inView y={24} delay={idx * 0.1} className="group">
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 bg-zinc-100">
+                <Image
+                  src={doc.image}
+                  alt={`Retrato de ${doc.name}`}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500 ease-out"
+                />
+              </div>
+              <h3 className="text-lg font-medium text-zinc-950">{doc.name}</h3>
+              <p className="text-sm text-zinc-500">{doc.role}</p>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CTASection() {
+  return (
+    <section id="contato" className="py-24 bg-cyan-800 text-white border-b border-cyan-900 scroll-mt-8">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-6">
+            Pronto para iniciar sua recuperação?
+          </h2>
+          <p className="text-cyan-100 text-lg max-w-md mb-8">
+            Nossa equipe está pronta para avaliar seu caso e propor o melhor plano de tratamento.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href={whatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-white text-cyan-900 px-6 py-3 rounded-full hover:bg-zinc-100 transition-colors active:scale-[0.98] font-medium"
+            >
+              <WhatsappLogo size={20} weight="fill" className="text-green-600" />
+              Falar no WhatsApp
+            </a>
+            <a
+              href={telefoneUrl}
+              className="flex items-center justify-center gap-2 border border-cyan-600 text-white px-6 py-3 rounded-full hover:bg-cyan-700 transition-colors active:scale-[0.98]"
+            >
+              Ligar para a clínica
+            </a>
+          </div>
+        </div>
+
+        <div className="flex justify-start md:justify-end">
+          <div className="bg-cyan-900 p-8 rounded-3xl max-w-sm w-full">
+            <h3 className="text-xl font-medium mb-4">Horário de Atendimento</h3>
+            <ul className="space-y-3 text-cyan-100">
+              <li className="flex justify-between border-b border-cyan-800 pb-2">
+                <span>Segunda a Sexta</span>
+                <span>07:00 às 20:00</span>
+              </li>
+              <li className="flex justify-between border-b border-cyan-800 pb-2">
+                <span>Sábados</span>
+                <span>08:00 às 12:00</span>
+              </li>
+              <li className="flex justify-between pt-1">
+                <span>Domingos e Feriados</span>
+                <span className="text-cyan-400/80">Fechado</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <main className="min-h-screen bg-zinc-50 w-full">
+      <HeroSection />
+      <ServicesBento />
+      <DoctorsSection />
+      <CTASection />
+      <Footer />
+    </main>
   );
 }

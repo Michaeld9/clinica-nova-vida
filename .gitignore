@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# mídia bruta (o vídeo usado pelo site fica em /public)
+/*.mp4
